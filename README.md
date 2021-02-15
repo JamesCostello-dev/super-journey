@@ -21,9 +21,6 @@ JavaScript, Node, Express, MongoDB, Mongoosejs
 
 [Repository Link](https://github.com/JamesCostello-dev/super-journey)
 
-## Media
-[https://drive.google.com/file/d/1hMAUefggh4-UTv9UVCmaXggmZe8ESR_z/view](url)
-
 ## Contributions
 
 Made by: James-Costello-dev
