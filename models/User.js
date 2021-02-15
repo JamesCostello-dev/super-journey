@@ -15,21 +15,28 @@ const UserSchema = new Schema({
     required: true,
     match: [/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i, 'Please use a valid email']
   },
-  thoughts: {
-    type: Schema.ObjectId,
-    ref: 'Thought'
-  },
-  friends: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  },
-  toJSON: {
-    virtuals: true
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Thought'
+    }
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+},
+  {
+    toJSON: {
+      virtuals: true
+    }
   }
-});
+);
 
 UserSchema.virtual('friendCount').get(function () {
-  return this.friends.reduce((total, friends) => total + friends.length)
+  return this.friends.length;
 });
 
 const User = model('User', UserSchema);
