@@ -63,6 +63,40 @@ const userControllers = {
       })
       .catch(err => res.status(400).json(err));
   },
+
+  // add friend
+  addFriend({ params }, res) {
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $push: { friends: params.friendId } },
+      { new: true }
+    )
+      .then(results => {
+        if (!results) {
+          res.status(400).json({ message: 'no user found' })
+          return;
+        }
+        res.json(results)
+      })
+      .catch(err => res.status(400).json(err));
+  },
+
+  // remove friend
+  removeFriend({ params }, res) {
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $pull: { friends: params.friendId } },
+      { new: true }
+    )
+      .then(results => {
+        if (!results) {
+          res.status(400).json({ message: 'no user found' })
+          return;
+        }
+        res.json(results)
+      })
+      .catch(err => res.status(400).json(err));
+  }
 };
 
 module.exports = userControllers;

@@ -9,8 +9,6 @@ const {
   removeThought,
   createReaction,
   removeReaction,
-  addFriend,
-  removeFriend
 } = require('../../controllers/thought-controller');
 
 // /api/thoughts
@@ -20,10 +18,16 @@ const {
 // PUT update thought by id
 // DELETE remove thought by id
 
-router.route('/api/thoughts')
-  .get(getAllThoughts)
-  .get(getThoughtById)
+router.route('/')
+  .get(getAllThoughts);
+
+router.route('/:thoughtId')
+  .get(getThoughtById);
+
+router.route('/:userId')
   .post(createThought)
+
+router.route('/:userId/:thoughtId')
   .put(updateThought)
   .delete(removeThought);
 
@@ -31,16 +35,8 @@ router.route('/api/thoughts')
 // POST create reaction stored in a single thoughts array
 // DELETE $pull and remove a reaction by the reactions id 
 
-router.route('/api/thoughts/:thoughtId/reactions')
+router.route('/:thoughtId/:reactionId')
   .post(createReaction)
   .delete(removeReaction);
-
-// /api/users/:userId/friends/:friendId
-// POST add new friend to friends list
-// DELETE remove friend from frends list
-
-router.route('/api/users/:userId/friends/:friendsId')
-  .post(addFriend)
-  .delete(removeFriend);
 
 module.exports = router;
